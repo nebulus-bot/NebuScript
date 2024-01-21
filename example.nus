@@ -1,0 +1,15 @@
+import "discord";
+import "base";
+
+def init() {
+    discord.Command("ping", pong);
+}
+
+def pong(ctx: discord.Context) {
+    discord.Send("Pong!");
+}
+
+![ base.AllowPython ];
+def py() {
+    base.Python("print(1)");
+}
