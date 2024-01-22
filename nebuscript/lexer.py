@@ -3,9 +3,6 @@ import sys
 from nebuscript.Token import *
 import logging
 
-print("Lexing...")
-
-
 class Lexer:
     def __init__(self, input, logger):
         self.source = input + "\n"
@@ -178,16 +175,16 @@ class Lexer:
             self.abort("Unrecognized character: " + self.curChar)
 
         self.nextChar()
-        self.logger.info("Recieved new token: " + str(token))
+        self.logger.debug("Recieved new token: " + str(token))
         return token
 
     def skipWhitespace(self):
-        self.logger.info("Skipping whitespace")
+        self.logger.debug("Skipping whitespace")
         while self.curChar == ' ' or self.curChar == '\t' or self.curChar == '\r':
             self.nextChar()
 
     def skipComment(self):
-        self.logger.info("Skipping comment")
+        self.logger.debug("Skipping comment")
         if self.curChar == '#':
             while self.curChar != '\n':
                 self.nextChar()
