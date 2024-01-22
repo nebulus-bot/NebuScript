@@ -5,7 +5,7 @@
 The official scripting language for the Nebulus Discord Bot!
 
 ## TODO
-* [ ] Lexer ***(in progress)***
+* [x] Lexer
 * [x] Tokens
 * [ ] Parser
 * [ ] Emitter

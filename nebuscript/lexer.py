@@ -3,6 +3,7 @@ import sys
 from nebuscript.Token import *
 import logging
 
+
 class Lexer:
     def __init__(self, input, logger):
         self.source = input + "\n"
@@ -31,6 +32,7 @@ class Lexer:
         return self.source[self.curPos+1]
 
     def abort(self, message):
+        # TODO: Change to Exception Manager
         self.logger.critical(f"Lexing error: {message} @ {self.curLine}:{self.curColumn}")
         sys.exit(1)
 
