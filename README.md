@@ -10,6 +10,7 @@ The official scripting language for the Nebulus Discord Bot!
 * [ ] Parser
 * [ ] Emitter
 * [ ] Builtins
+* [ ] Exception Handler
 * [ ] Image Compiler
 * [ ] Python Package
 
