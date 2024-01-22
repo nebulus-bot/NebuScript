@@ -1,10 +1,11 @@
 # TODO: Redo this betterer
 
 import logging
+import sys
 import argparse
-import time
+import pathlib
 
-from nebuscript.lexer import *
+from nebuscript.lexer import Lexer
 
 
 class CustomFormatter(logging.Formatter):
@@ -40,7 +41,8 @@ logger.addHandler(handler)
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument("-V", "--verbose", action="store_true")
+parser.add_argument("-V", "--verbose", action="store_true", help=argparse.SUPPRESS)
+parser.add_argument("--developer", action="store_true", help=argparse.SUPPRESS)
 
 subparser = parser.add_subparsers(dest="command")
 
@@ -53,6 +55,10 @@ if args.verbose:
     handler.setLevel(logging.DEBUG)
     logger.info("Log Level set to 'DEBUG'")
 
+if args.developer:
+    logger.info("Created development folder")
+    pathlib.Path("developer").mkdir(exist_ok=True)
+
 match args.command:
     case "build":
         logger.info(f"Reading file: {args.file}")
@@ -61,6 +67,13 @@ match args.command:
             file.close()
         logger.info(f"Finished reading file: {args.file}")
         tokens = lex.lex()
+        if args.developer:
+            logger.debug("Prepairing to write tokens...")
+            with open("developer/tokens.txt", "w") as tokenList:
+                for token in tokens:
+                    tokenList.write(repr(token) + "\n")
+                tokenList.close()
+            logger.debug("Tokens have been written.")
 
     case None:
         parser.print_help()
